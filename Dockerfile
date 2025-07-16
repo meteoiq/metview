@@ -13,7 +13,7 @@ RUN set -ex \
         libcairo2-dev \
         libpango1.0-dev \
         libproj-dev \
-        libnetcdf-dev \
+        libnetcdf-c++4-dev \
 	&& rm -rf /var/lib/apt/lists/*
 
 ENV METVIEWBUNDLE=MetviewBundle-2025.4.0-Source
