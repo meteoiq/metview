@@ -1,2 +1,18 @@
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.idea
+
+# CI/CD
+.github
+
+# Documentation
 *.md
 LICENSE
+
+# Docker
+.dockerignore
+

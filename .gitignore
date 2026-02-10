@@ -1,1 +1,23 @@
-.idea
+# IDE - JetBrains
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# OS - macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# OS - Windows
+Thumbs.db
+Desktop.ini
+
+# OS - Linux
+*~
+
+# Editor temporary files
+*.swp
+*.swo
+*.tmp
