@@ -55,7 +55,7 @@ RUN curl -L -o ${METVIEWBUNDLE}.tar.gz https://confluence.ecmwf.int/download/att
 
 WORKDIR /build
 RUN export RPC_PATH="$(find / -name libtirpc.so.3 -exec dirname {} \;)" && \
-    cmake -DENABLE_UI=OFF -DENABLE_EXPOSE_SUBPACKAGES=OFF -DCMAKE_BUILD_TYPE=Release /src/${METVIEWBUNDLE} &&  \
+    cmake -DENABLE_UI=OFF -DENABLE_EXPOSE_SUBPACKAGES=ON -DCMAKE_BUILD_TYPE=Release /src/${METVIEWBUNDLE} &&  \
     make -j$PARALLELISM &&  \
     make install && \
     rm -r /build
