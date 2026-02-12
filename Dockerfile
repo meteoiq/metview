@@ -51,7 +51,7 @@ WORKDIR /
 RUN mkdir -p /src
 RUN mkdir -p /build
 WORKDIR /src
-RUN curl -L -o ${METVIEWBUNDLE}.tar.gz https://confluence.ecmwf.int/download/attachments/51731119/${METVIEWBUNDLE}.tar.gz && tar -xzvf ${METVIEWBUNDLE}.tar.gz && rm -rf ${METVIEWBUNDLE}.tar.gz
+RUN curl -L -o ${METVIEWBUNDLE}.tar.gz https://confluence.ecmwf.int/download/attachments/51731119/${METVIEWBUNDLE}.tar.gz && tar -xzf ${METVIEWBUNDLE}.tar.gz && rm -rf ${METVIEWBUNDLE}.tar.gz
 
 WORKDIR /build
 RUN export RPC_PATH="$(find / -name libtirpc.so.3 -exec dirname {} \;)" && \
