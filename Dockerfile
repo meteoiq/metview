@@ -1,11 +1,11 @@
 # syntax=docker/dockerfile:1
 
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 LABEL org.opencontainers.image.source=https://github.com/meteoiq/metview
 
 ENV METVIEWBUNDLE=MetviewBundle-2026.1.0-Source
 ENV LIBAEC_VERSION=1.0.6
-ARG PARALLELISM=1
+ENV ECCODES_VERSION=2.45.0
 
 RUN apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install --yes --no-install-suggests --no-install-recommends \
@@ -55,12 +55,14 @@ RUN curl -L -o ${METVIEWBUNDLE}.tar.gz https://confluence.ecmwf.int/download/att
 
 WORKDIR /build
 RUN export RPC_PATH="$(find / -name libtirpc.so.3 -exec dirname {} \;)" && \
-    cmake -DENABLE_UI=OFF -DENABLE_EXPOSE_SUBPACKAGES=ON -DCMAKE_BUILD_TYPE=Release /src/${METVIEWBUNDLE} &&  \
-    make -j$PARALLELISM &&  \
+    cmake -DENABLE_UI=OFF -DENABLE_EXPOSE_SUBPACKAGES=OFF -DCMAKE_BUILD_TYPE=Release /src/${METVIEWBUNDLE} &&  \
+    make &&  \
     make install && \
     rm -r /build
 
-RUN pip install metview xarray rioxarray rasterio cfgrib ecmwf-opendata psutil
+RUN apt-get remove --yes --no-install-suggests --no-install-recommends python3-packaging
+RUN pip3 install --break-system-packages eccodes --no-binary eccodes
+RUN pip3 install --break-system-packages metview pandas==2.3.3 xarray rioxarray rasterio cfgrib ecmwf-opendata psutil
 
 RUN mkdir -p /examples
 COPY examples/* /examples/
