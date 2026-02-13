@@ -72,10 +72,10 @@ def atomize_and_regrid(parameter, f, steps):
                 - f.select(shortName=parameter, endStep=step - 6),
                 grid=[2, 2],
             )
-        elif parameter == "u10" or parameter == "v10":
+        elif parameter == "10u" or parameter == "10v":
             atomized_filename = f"/tmp/ff10_{step:03d}.grib2"
             ff10 = calculate_windspeed(
-                f.select(shortName="u10", endStep=step), f.select(shortName="v10")
+                f.select(shortName="10u", endStep=step), f.select(shortName="10v", endStep=step)
             )
             new = mv.regrid(data=ff10, grid=[2, 2])
         else:
@@ -108,7 +108,7 @@ steps = list(range(6, 144, 6))
 f = fieldset_from_opendata(parameters, steps)
 
 print("Content of downloaded datasets:")
-print(f.ls(no_print=True))
+print(f.ls(extra_keys=["endStep"],no_print=True))
 
 print("\nFiles before processing in /tmp:")
 list_files("/tmp")

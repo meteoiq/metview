@@ -1,5 +1,6 @@
 import metview as mv
 from ecmwf.opendata import Client
+from eccodes import *
 
 # print version information
 print(mv.version_info())
