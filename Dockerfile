@@ -3,9 +3,9 @@
 FROM ubuntu:24.04
 LABEL org.opencontainers.image.source=https://github.com/meteoiq/metview
 
-ENV METVIEWBUNDLE=MetviewBundle-2026.1.0-Source
+ENV METVIEWBUNDLE=MetviewBundle-2026.2.0-Source
 ENV LIBAEC_VERSION=1.0.6
-ENV ECCODES_VERSION=2.45.0
+ENV ECCODES_VERSION=2.46.0
 
 RUN apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install --yes --no-install-suggests --no-install-recommends \
